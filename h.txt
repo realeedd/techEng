@@ -1,0 +1,76 @@
+ def onDictionary(self):
+        self.dictionary = DictionaryWindow(self.con, self.id, self)
+        self.setCentralWidget(self.dictionary)
+        self.dictionary.show()
+self.dictionaryAction = QAction('Словарь')
+        self.theoryMenu.addAction(self.dictionaryAction)
+        self.dictionaryAction.triggered.connect(self.onDictionary)
+class DictionaryWindow(QWidget):
+    def __init__(self, connection, userId, testWindow):
+        super().__init__(testWindow)
+        uic.loadUi('dictionary.ui', self)
+        
+        self.con = connection
+        cur = self.con.cursor()
+        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}')
+        self.words = []
+        self.disc = []
+        self.lst = []
+        #составляем список слов
+        with open('developing.csv') as csvf:
+            reader = csv.reader(csvf, delimiter=';', quotechar='"')
+            for x in reader:
+                self.words.append(x[0])
+                self.disc.append(x[1])
+                
+        with open('keywords.csv') as csvf:
+            reader = csv.reader(csvf, delimiter=';', quotechar='"')
+            for x in reader:
+                self.words.append(x[0])
+                self.disc.append(x[1])
+        try:       
+            with open('termsdisc.csv') as csvf:
+                reader = csv.reader(csvf, delimiter=';', quotechar='"')
+                for x in reader:
+                    self.words.append(x[0])
+                    self.disc.append(x[1])
+            #изначальный список слов       
+            for i in range(len(self.words)):
+                self.lst.append(self.words[i])
+            #слова в алфавитном прядке
+            self.words = sorted(self.words)
+            #выводим слова на экран
+            for i in range(len(self.words)):
+                self.wordList.addItem(self.words[i])
+            #слово по клику
+            self.wordList.currentTextChanged.connect(self.selectionChanged)
+
+            self.chooseWord = ChooseWord()
+            self.newWord.clicked.connect(self.chooseWindow)
+        except Exception as error:
+            print(error)
+        
+    def chooseWindow(self):
+        self.chooseWord.show()
+            
+    #выводим значение слова      
+    def selectionChanged(self, item):
+        ind = self.lst.index(item)
+        self.discWord.setText(self.disc[ind])
+        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+
+        
+class ChooseWord(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        
+        uic.loadUi('chooseword.ui', self)
+        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}')
+        word = self.word.text()
+        meaning = self.meaning.text()
+        
+        self.comboBox.currentText.connect(self.currentText)
+
+    def currentText(self):
+        print()
+        
