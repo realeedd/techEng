@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QWidget</class>
- <widget class="QWidget" name="QWidget">
+ <class>TechEng</class>
+ <widget class="QWidget" name="TechEng">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -66,7 +66,6 @@
              <font>
               <family>Trebuchet MS</family>
               <pointsize>20</pointsize>
-              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -111,7 +110,7 @@ background:rgba(255, 255, 255, 0.3);
             <property name="styleSheet">
              <string notr="true">border-width:3px;
 border-color: rgb(114, 144, 228);
-color: rbg(57, 57, 57);
+color: rgb(57, 57, 57);
 border-style: solid</string>
             </property>
             <property name="text">
@@ -148,7 +147,6 @@ border-style: solid</string>
            <font>
             <family>Trebuchet MS</family>
             <pointsize>24</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>TechEng</class>
+ <widget class="QMainWindow" name="TechEng">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -255,7 +255,6 @@
          <font>
           <family>Trebuchet MS</family>
           <pointsize>26</pointsize>
-          <weight>50</weight>
           <bold>false</bold>
          </font>
         </property>
@@ -273,7 +272,6 @@
          <font>
           <family>Trebuchet MS</family>
           <pointsize>72</pointsize>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -318,7 +316,6 @@
            <font>
             <family>Trebuchet MS</family>
             <pointsize>20</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
@@ -357,7 +354,6 @@ border-style: solid;
            <font>
             <family>Trebuchet MS</family>
             <pointsize>20</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
@@ -404,7 +400,6 @@ border-style: solid;
          <font>
           <family>Trebuchet MS</family>
           <pointsize>36</pointsize>
-          <weight>50</weight>
           <bold>false</bold>
          </font>
         </property>

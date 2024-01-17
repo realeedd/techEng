@@ -143,14 +143,14 @@ class Testing(QMainWindow):
         self.id = userId
         self.onMainAction()
         # подключаем меню
-        self.mainMenu = QMenu("Главная страница", self)
+        self.mainMenu = QMenu("Результаты", self)
         self.menubar.addMenu(self.mainMenu)
         
-        self.mainPageAction = QAction("Главная страница", self)
+        self.mainPageAction = QAction("Результаты", self)
         self.mainMenu.addAction(self.mainPageAction)
         self.mainPageAction.triggered.connect(self.onMainAction)
 
-        self.theoryMenu = QMenu("Теория", self)
+        self.theoryMenu = QMenu("Словарь", self)
         self.menubar.addMenu(self.theoryMenu)
         
         self.testsMenu = QMenu("Тесты", self)
@@ -361,6 +361,7 @@ class MainPage(QWidget):
         # айди пользователя
         self.id = userId
         self.refresh()
+        self.picture.setStyleSheet('background-image: url(pixil-frame-0 (1).png);')
         try:
             name = cur.execute('''SELECT login FROM users
                                 WHERE id = ?''', (self.id,)).fetchall()[0][0]
