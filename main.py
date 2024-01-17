@@ -1178,8 +1178,18 @@ class ComputerWindow(QWidget):
         self.id = userId
         self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
         self.theoryWindow = theoryWindow
-        self.label_2.setStyleSheet('''background: url(photo_2024-01-12_00-43-25.jpg)
-                                    no-repeat;''')
+
+        self.cpu.setStyleSheet('background-image: url(cpu.png);')
+        self.cpucooler.setStyleSheet('background-image: url(cpucooler.png);')
+        self.graphiccard.setStyleSheet('background-image: url(graphiccard.png);')
+        self.hdd.setStyleSheet('background-image: url(hdd.png);')
+        self.motherboard.setStyleSheet('background-image: url(motherboard.png);')
+        self.powersupply.setStyleSheet('background-image: url(powersupply.png);')
+        self.ram.setStyleSheet('background-image: url(ram.png);')
+        self.soundcard.setStyleSheet('background-image: url(soundcard.png);')
+        self.ssd.setStyleSheet('background-image: url(ssd.png);')
+        self.ports.setStyleSheet('background-image: url(ports.png);')
+
         self.readButton.clicked.connect(self.readCheck)
         style = '''
                 QPushButton{background-color:rgb(89, 222, 118);
