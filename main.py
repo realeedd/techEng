@@ -56,27 +56,31 @@ class RegWindow(QMainWindow):
 
     # добавляем пользователя
     def addData(self):
-        login = self.regLogin.text()
-        password = self.regPassword.text()
-        cur = self.con.cursor()
-        insert_data = """INSERT INTO users
-                          (login, password)
-                          VALUES
-                          (?, ?)"""
-        # проверка введеных данных
-        if login == '':
-            QMessageBox.critical(self, 'Ошибка', 'Логин не введен')
+        try:
+            login = self.regLogin.text()
+            password = self.regPassword.text()
+            cur = self.con.cursor()
+            insert_data = """INSERT INTO users
+                              (login, password)
+                              VALUES
+                              (?, ?)"""
+            # проверка введеных данных
+            if login == '':
+                QMessageBox.critical(self, 'Ошибка', 'Логин не введен')
 
-        elif len(login) < 3:
-            QMessageBox.critical(self, 'Ошибка', 'Недостаточно символов')
+            elif len(login) < 3:
+                QMessageBox.critical(self, 'Ошибка', 'Недостаточно символов')
 
-        elif password == '':
-            QMessageBox.critical(self, 'Ошибка', 'Пароль не введен')
+            elif password == '':
+                QMessageBox.critical(self, 'Ошибка', 'Пароль не введен')
 
-        elif len(cur.execute('''SELECT login FROM users
-                                WHERE login = ?''', (login,)).fetchall()) != 0:
-            QMessageBox.critical(self, 'Ошибка', 'Такой пользователь уже существует')
+            elif len(cur.execute('''SELECT login FROM users
+                                    WHERE login = ?''', (login,)).fetchall()) != 0:
+                QMessageBox.critical(self, 'Ошибка', 'Такой пользователь уже существует')
+        except Exception as error:
+            print(error)
         else:
+
             # регистрируем человека в базу данных
             try:
                 cur.execute(insert_data, (login, password))
@@ -86,8 +90,12 @@ class RegWindow(QMainWindow):
                             WHERE login = ?''', (login,)).fetchall()
                 print(users)
                 userId = users[0][0]
+                print(userId)
+
                 # показываем следующее окно
+                self.hide()
                 self.testingWindow = Testing(self.con, userId)
+                print(0)
                 self.testingWindow.show()
             except Exception as err:
                 print(err)
@@ -274,19 +282,19 @@ class DictionaryWindow(QWidget):
         self.lst = []
         self.discWord.setText('')
         #составляем список слов
-        with open('developing.csv') as csvf:
+        with open('developing.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             for x in reader:
                 self.words.append(x[0])
                 self.disc.append(x[1])
                 
-        with open('keywords.csv') as csvf:
+        with open('keywords.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             for x in reader:
                 self.words.append(x[0])
                 self.disc.append(x[1])
         try:       
-            with open('termsdisc.csv') as csvf:
+            with open('termsdisc.csv', encoding='windows-1251') as csvf:
                 reader = csv.reader(csvf, delimiter=';', quotechar='"')
                 for x in reader:
                     self.words.append(x[0])
@@ -332,15 +340,15 @@ class ChooseWord(QMainWindow):
         if newWord != '' and meaning != '':
             typeWord = self.comboBox.currentText()
             if typeWord == 'Ключевые слова':
-                with open('keywords.csv', mode='a') as csvf:
+                with open('keywords.csv', mode='a', encoding='windows-1251') as csvf:
                     s = f'{newWord};{meaning}\n'
                     csvf.writelines(s)
             if typeWord == 'Слова для разработки':
-                with open('developing.csv', mode='a') as csvf:
+                with open('developing.csv', mode='a', encoding='windows-1251') as csvf:
                     s = f'{newWord};{meaning}\n'
                     csvf.writelines(s)
             if typeWord == 'Back-end разработка':
-                with open('termsdisc.csv', mode='a') as csvf:
+                with open('termsdisc.csv', mode='a', encoding='windows-1251') as csvf:
                     s = f'{newWord};{meaning}\n'
                     csvf.writelines(s)
             self.dictWindow.refresh()
@@ -362,11 +370,12 @@ class MainPage(QWidget):
         self.id = userId
         self.refresh()
         self.picture.setStyleSheet('background-image: url(pixil-frame-0 (1).png);')
+        self.picture_2.setStyleSheet('background-image: url(pngwing.com.png);')
         try:
             name = cur.execute('''SELECT login FROM users
                                 WHERE id = ?''', (self.id,)).fetchall()[0][0]
             print(name)
-            self.login.setText(f'Логин пользователя: {name}')
+            self.login.setText(name)
         except Exception as error:
             print(error)
 
@@ -374,29 +383,41 @@ class MainPage(QWidget):
     # показываем обновленные данные пользователей
     def refresh(self):
         cur = self.con.cursor()
-        keywordsPoints = cur.execute('''SELECT points FROM test_results
-        WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'keywords')).fetchall()[0][0]
-        self.keywordsPoints.setText(f'Ключевые слова: {keywordsPoints // 10} / 15')
-        print(keywordsPoints)
+        kc = 0
+        for row in open("keywords.csv", encoding='windows-1251'):
+            kc += 1
+        dc = 0
+        for row in open("developing.csv", encoding='windows-1251'):
+            dc += 1
+        keywordsPointsData = cur.execute('''SELECT points FROM test_results
+        WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'keywords')).fetchall()
+        keywordsPoints = 0
+        if len(keywordsPointsData) > 0:
+            keywordsPoints = keywordsPointsData[0][0]
+        self.keywordsPoints.setText(f'Ключевые слова: {keywordsPoints // 10} / {kc}')
 
-        developPoints = cur.execute('''SELECT points FROM test_results
-        WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'develop')).fetchall()[0][0]
-        self.developPoints.setText(f'Слова для разработки: {developPoints // 10} / 14')
 
-        compPoints = cur.execute('''SELECT points FROM test_results
-        WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'computer')).fetchall()[0][0]
+        developPointsData = cur.execute('''SELECT points FROM test_results
+        WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'develop')).fetchall()
+        developPoints = 0
+        if len(developPointsData) > 0:
+            developPoints = developPointsData[0][0]
+        self.developPoints.setText(f'Слова для разработки: {developPoints // 10} / {dc}')
+
+        compPointsData = cur.execute('''SELECT points FROM test_results
+        WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'computer')).fetchall()
+        compPoints = 0
+        if len(compPointsData) > 0:
+            compPoints = compPointsData[0][0]
         self.compPoints.setText(f'Компьютер: {compPoints // 10} / 8')
 
-        termsPoints = cur.execute('''SELECT points FROM test_results
-        WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'terms')).fetchall()[0][0]
+        termsPointsData = cur.execute('''SELECT points FROM test_results
+        WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'terms')).fetchall()
+        termsPoints = 0
+        if len(termsPointsData) > 0:
+            termsPoints = termsPointsData[0][0]
         self.termsPoint.setText(f'Вставить термин: {termsPoints // 10} / 9')
 
-        pointsTheory = cur.execute('''SELECT count(lesson) FROM theory
-        WHERE user_id = ?''', (self.id,)).fetchall()[0][0] * 10
-
-        #self.pointTestLable.setText(f'Прогресс тестирования: {pointsTest}')
-        self.pointTheoryLable.setText(f'Пройденные уроки: {pointsTheory // 10} / 4')
-        
 
 # окно тестов с ключевыми словами
 class KeywordsTestWindow(QWidget):
@@ -408,7 +429,7 @@ class KeywordsTestWindow(QWidget):
         self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
 
         # cоздаем список слов и их объяснений
-        with open('keywords.csv') as csvf:
+        with open('keywords.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             self.words = []
             self.disc = []
@@ -600,7 +621,7 @@ class DevelopTestWindow(QWidget):
         self.id = userId
         cur = self.con.cursor()
         self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
-        with open('developing.csv') as csvf:
+        with open('developing.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             self.words = []
             self.disc = []
@@ -785,11 +806,21 @@ class ComputerTestWindow(QWidget):
         self.id = userId
         cur = self.con.cursor()
         self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
-        self.label.setStyleSheet('''background: url(photo_2024-01-12_00-01-35.jpg)
-                                    no-repeat;''')
+
         
         self.checkAnswer.clicked.connect(self.check)
-        self.elements = [self.answer1, self.answer2, self.answer3, self.answer4, self.answer5, self.answer6, self.answer7, self.answer8]
+        self.elements = [self.answer1, self.answer2, self.answer3, self.answer4, self.answer5, self.answer6,
+                         self.answer7, self.answer8, self.answer9, self.answer10]
+        self.cpu.setStyleSheet('background-image: url(cpu.png);')
+        self.cpucooler.setStyleSheet('background-image: url(cpucooler.png);')
+        self.graphiccard.setStyleSheet('background-image: url(graphiccard.png);')
+        self.hdd.setStyleSheet('background-image: url(hdd.png);')
+        self.motherboard.setStyleSheet('background-image: url(motherboard.png);')
+        self.powersupply.setStyleSheet('background-image: url(powersupply.png);')
+        self.ram.setStyleSheet('background-image: url(ram.png);')
+        self.soundcard.setStyleSheet('background-image: url(soundcard.png);')
+        self.ssd.setStyleSheet('background-image: url(ssd.png);')
+        self.ports.setStyleSheet('background-image: url(ports.png);')
 
         self.tryAgain.clicked.connect(self.again)
 
@@ -800,19 +831,17 @@ class ComputerTestWindow(QWidget):
                 '''
         for i in range(0, 8):
             self.elements[i].setStyleSheet(style)
-            self.elements[i].setPlainText('')
+            self.elements[i].setText('')
             
     def check(self):
         try:
             k = 0
-            words = ['case', 'optical disk drive', 'power supply unit', 'hard disk drive', 'main memory', 'expansion cards', 'motherboard', 'cpu']
-            for i in range(0, 8):
-                if self.elements[i].toPlainText().lower() == words[i] and i != 7:
+            words = ['cpu', 'cpu cooler', 'Graphics card', 'hdd', 'motherboard',
+                     'power supply', 'ram', 'sound card', 'ssd', 'ports']
+            for i in range(0, 10):
+                if self.elements[i].text().lower() == words[i]:
                     k+= 1
                     self.elements[i].setStyleSheet('background: rgb(170, 255, 127);')
-                elif i == 7 and self.elements[i].toPlainText().lower() == words[i] or\
-                     self.elements[i].toPlainText().lower() == 'processor':
-                    k+= 1
                     self.elements[i].setStyleSheet('background: rgb(170, 255, 127);')
                 else:
                     self.elements[i].setStyleSheet('background: rgb(255, 73, 73);')
@@ -836,7 +865,7 @@ class TermsTestWindow(QWidget):
         self.id = userId
         cur = self.con.cursor()
         self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
-        with open('terms.csv') as csvf:
+        with open('terms.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             self.words = []
             self.sentence = []
@@ -1050,7 +1079,7 @@ class KeywordsWindow(QWidget):
         self.lst = []
         self.answer.setText('')
         #составляем список слов
-        with open('keywords.csv') as csvf:
+        with open('keywords.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             for x in reader:
                 self.words.append(x[0])
@@ -1128,7 +1157,7 @@ class DevelopWindow(QWidget):
         self.lst = []
         self.answer.setText('')
         #составляем список слов
-        with open('developing.csv') as csvf:
+        with open('developing.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             for x in reader:
                 self.words.append(x[0])
@@ -1263,7 +1292,7 @@ class TermsWindow(QWidget):
         self.lst = []
         self.answer.setText('')
         #составляем список слов
-        with open('termsdisc.csv') as csvf:
+        with open('termsdisc.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             for x in reader:
                 self.words.append(x[0])

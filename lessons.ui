@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>839</width>
-    <height>600</height>
+    <width>851</width>
+    <height>690</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
+    <width>850</width>
     <height>600</height>
    </size>
   </property>
@@ -41,32 +41,60 @@
    <item>
     <widget class="QWidget" name="widget" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <property name="spacing">
+       <number>10</number>
+      </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="spacing">
+         <number>10</number>
+        </property>
         <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="leftMargin">
+           <number>200</number>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Preferred</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::MinimumExpanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item>
            <widget class="QLabel" name="login">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>250</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>80</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <family>Trebuchet MS</family>
-              <pointsize>20</pointsize>
+              <pointsize>24</pointsize>
+              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -74,7 +102,7 @@
              <string notr="true">color: rgb(57, 57, 57)</string>
             </property>
             <property name="text">
-             <string/>
+             <string>hj</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -82,20 +110,29 @@
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+           <widget class="QLabel" name="picture_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>80</width>
+              <height>80</height>
              </size>
             </property>
-           </spacer>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -103,105 +140,119 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="spacing">
+         <number>30</number>
+        </property>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <property name="spacing">
-           <number>30</number>
+         <widget class="QFrame" name="frame">
+          <property name="styleSheet">
+           <string notr="true">background-color:rgba(255, 255, 255, 0.4)</string>
           </property>
-          <item>
-           <widget class="QLabel" name="lable">
-            <property name="font">
-             <font>
-              <family>Trebuchet MS</family>
-              <pointsize>24</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(57, 57, 57)</string>
-            </property>
-            <property name="text">
-             <string>Последние прохождения тестов</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="keywordsPoints">
-            <property name="font">
-             <font>
-              <family>Trebuchet MS</family>
-              <pointsize>24</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(57, 57, 57)</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="developPoints">
-            <property name="font">
-             <font>
-              <family>Trebuchet MS</family>
-              <pointsize>24</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(57, 57, 57)</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="compPoints">
-            <property name="font">
-             <font>
-              <family>Trebuchet MS</family>
-              <pointsize>24</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(57, 57, 57)</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="termsPoint">
-            <property name="font">
-             <font>
-              <family>Trebuchet MS</family>
-              <pointsize>24</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(57, 57, 57)</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-         </layout>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <property name="spacing">
+            <number>30</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lable">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>24</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57)</string>
+             </property>
+             <property name="text">
+              <string>Последние прохождения тестов</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="keywordsPoints">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+background-color: rgba(255, 255, 255, 0)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="developPoints">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+background-color: rgba(255, 255, 255, 0)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="compPoints">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+background-color: rgba(255, 255, 255, 0)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="termsPoint">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+background-color: rgba(255, 255, 255, 0)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="picture">
           <property name="minimumSize">
            <size>
             <width>300</width>
-            <height>300</height>
+            <height>293</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>300</width>
-            <height>300</height>
+            <height>293</height>
            </size>
           </property>
           <property name="text">
@@ -214,61 +265,35 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="spacing">
-         <number>22</number>
+         <number>20</number>
         </property>
         <property name="leftMargin">
-         <number>20</number>
+         <number>0</number>
         </property>
         <property name="topMargin">
          <number>30</number>
         </property>
         <property name="rightMargin">
-         <number>20</number>
+         <number>30</number>
         </property>
         <property name="bottomMargin">
          <number>50</number>
         </property>
         <item>
-         <widget class="QLabel" name="pointTheoryLable">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <property name="minimumSize">
+          <property name="sizeType">
+           <enum>QSizePolicy::MinimumExpanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
            <size>
-            <width>30</width>
-            <height>80</height>
+            <width>280</width>
+            <height>20</height>
            </size>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>80</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Trebuchet MS</family>
-            <pointsize>24</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background: rgba(255, 255, 255, 0.0);
-color: rgb(57, 57, 57)
-
-
-</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+         </spacer>
         </item>
        </layout>
       </item>

@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>741</height>
+    <width>806</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>800</width>
-    <height>720</height>
+    <height>800</height>
    </size>
   </property>
   <property name="font">
@@ -81,7 +81,6 @@
              <font>
               <family>Trebuchet MS</family>
               <pointsize>26</pointsize>
-              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -107,6 +106,9 @@
               <family>Trebuchet MS</family>
               <pointsize>18</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)</string>
             </property>
             <property name="text">
              <string>SSD (Твердотельный накопитель)</string>
@@ -168,6 +170,9 @@
               <pointsize>18</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)</string>
+            </property>
             <property name="text">
              <string>Ports (аппаратный порт)</string>
             </property>
@@ -183,6 +188,9 @@
               <family>Trebuchet MS</family>
               <pointsize>18</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)</string>
             </property>
             <property name="text">
              <string>Power supply ( блок питания)</string>
@@ -288,6 +296,9 @@
               <pointsize>20</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)</string>
+            </property>
             <property name="text">
              <string>HDD (жёсткий диск)</string>
             </property>
@@ -354,6 +365,10 @@
               <pointsize>18</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)
+</string>
+            </property>
             <property name="text">
              <string>Motherboard (материнская плата)</string>
             </property>
@@ -369,6 +384,9 @@
               <family>Trebuchet MS</family>
               <pointsize>18</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)</string>
             </property>
             <property name="text">
              <string>CPU (Центральный процессор)</string>
@@ -386,6 +404,10 @@
               <pointsize>18</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)
+</string>
+            </property>
             <property name="text">
              <string>RAM (Запоминающее устройство с произвольным доступом)</string>
             </property>
@@ -401,6 +423,9 @@
               <family>Trebuchet MS</family>
               <pointsize>18</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)</string>
             </property>
             <property name="text">
              <string>CPU cooler (Процессорный кулер)</string>
@@ -418,6 +443,10 @@
               <pointsize>18</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)
+</string>
+            </property>
             <property name="text">
              <string>Sound card (Звуковая карта)</string>
             </property>
@@ -433,6 +462,9 @@
               <family>Trebuchet MS</family>
               <pointsize>20</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(57, 57, 57)</string>
             </property>
             <property name="text">
              <string>Graphics card (видеокарта)</string>
@@ -518,7 +550,6 @@
            <font>
             <family>Trebuchet MS</family>
             <pointsize>24</pointsize>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
