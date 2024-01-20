@@ -9,50 +9,61 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QDialog, QWi
 from PyQt5.QtGui import QPixmap
 
 
-# главное окно
-class MainWindow(QMainWindow):
+class OpenWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('main.ui', self)
+        uic.loadUi('openingpage.ui', self)
         # объявляем базу данных
         self.con = sqlite3.connect('TechEngDB.sqlite')
         self.show()
-        # подключаем окна входа и регистрации
-        self.regWindow = RegWindow(self.con)
-        self.signWindow = SignWindow(self.con)
-        # подключаем кнопки
-        self.registr.clicked.connect(self.regButton)
-        self.signin.clicked.connect(self.signButton)
-        self.regWindow.backButton.clicked.connect(self.backToMain)
-        self.signWindow.backButton.clicked.connect(self.backToMain)
-        self.setStyleSheet('.QWidget {background-image: url(69c461fe46c248901150bfd7f23ea340.jpg);}')
+        self.showMain()
 
-    # показываем окно регистрации
+
+    def showMain(self):
+        mainWindow = MainWindow(self.con, self)
+        self.setCentralWidget(mainWindow)
+        mainWindow.registr.clicked.connect(self.regButton)
+        mainWindow.signin.clicked.connect(self.signButton)
+        mainWindow.show()
+
     def regButton(self):
-        self.hide()
-        self.regWindow.show()
+        regWindow = RegWindow(self.con, self)
+        self.setCentralWidget(regWindow)
+        regWindow.backButton.clicked.connect(self.showMain)
+        regWindow.show()
 
     # показываем окно входа
     def signButton(self):
-        self.hide()
-        self.signWindow.show()
+        signWindow = SignWindow(self.con, self)
+        self.setCentralWidget(signWindow)
+        signWindow.backButton.clicked.connect(self.showMain)
+        signWindow.show()
 
-    # возвращение к главному окну
-    def backToMain(self):
-        self.regWindow.hide()
-        self.signWindow.hide()
-        self.show()
+    def openTesting(self, userId):
+        self.testingWindow = Testing(userId)
+        try:
+            self.testingWindow.show()
+        except Exception as err:
+            print(err)
+        self.hide()
+
+# главное окно
+class MainWindow(QWidget):
+    def __init__(self, con, openingwindow):
+        super().__init__(openingwindow)
+        uic.loadUi('main.ui', self)
+        self.setStyleSheet('.QWidget {background-image: url(69c461fe46c248901150bfd7f23ea340.jpg);}')
 
 
 # окно регистрации
-class RegWindow(QMainWindow):
-    def __init__(self, connection):
-        super().__init__()
+class RegWindow(QWidget):
+    def __init__(self, connection, openingwindow):
+        super().__init__(openingwindow)
         self.con = connection
         uic.loadUi('reg.ui', self)
         self.regButton.clicked.connect(self.addData)
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
-
+        self.openingwindow = openingwindow
 
     # добавляем пользователя
     def addData(self):
@@ -91,24 +102,21 @@ class RegWindow(QMainWindow):
                 print(users)
                 userId = users[0][0]
                 print(userId)
-
-                # показываем следующее окно
-                self.hide()
-                self.testingWindow = Testing(self.con, userId)
-                print(0)
-                self.testingWindow.show()
+                self.openingwindow.openTesting(userId)
             except Exception as err:
                 print(err)
 
 
 # окно входа
-class SignWindow(QMainWindow):
-    def __init__(self, connection):
-        super().__init__()
+class SignWindow(QWidget):
+    def __init__(self, connection, openingwindow):
+        super().__init__(openingwindow)
         uic.loadUi('sign.ui', self)
         self.signButton.clicked.connect(self.logIn)
         self.con = connection
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
+        self.openingwindow = openingwindow
+
     def logIn(self):
         try:
             login = self.signLogin.text()
@@ -133,19 +141,17 @@ class SignWindow(QMainWindow):
             else:
                 # записываем айди, чтобы его позже передать в следующее окно
                 userId = users[0][0]
-                self.hide()
-                self.testingWindow = Testing(self.con, userId)
-                self.testingWindow.show()
+                self.openingwindow.openTesting(userId)
         except Exception as err:
             print(err)
 
 
 class Testing(QMainWindow):
-    def __init__(self, connection, userId):
+    def __init__(self, userId):
         super().__init__()
         uic.loadUi('mainpage.ui', self)
         
-        self.con = connection
+        self.con = sqlite3.connect('TechEngDB.sqlite')
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         # айди пользователя
         self.id = userId
@@ -164,9 +170,16 @@ class Testing(QMainWindow):
         self.testsMenu = QMenu("Тесты", self)
         self.menubar.addMenu(self.testsMenu)
 
+        self.newWordMenu= QMenu("Добавить слово", self)
+        self.menubar.addMenu(self.newWordMenu)
+
         
         #добавляем элементы в меню
         #меню с заданиями
+        self.newWordAction = QAction("Добавить слово", self)
+        self.newWordMenu.addAction(self.newWordAction)
+        self.newWordAction.triggered.connect(self.onNewWordAction)
+
         self.keywordstestingAction = QAction("Ключевые слова", self)
         self.testsMenu.addAction(self.keywordstestingAction)
         self.keywordstestingAction.triggered.connect(self.onKeywordsAction)
@@ -196,7 +209,7 @@ class Testing(QMainWindow):
         self.theoryMenu.addAction(self.comptheoryAction)
         self.comptheoryAction.triggered.connect(self.onCompTheory)
 
-        self.termstheoryAction = QAction("Усложненные термины", self)
+        self.termstheoryAction = QAction("Back-end разработка", self)
         self.theoryMenu.addAction(self.termstheoryAction)
         self.termstheoryAction.triggered.connect(self.onTermsTheory)
         self.setStyleSheet('''.QMenu {background-color: rgb(226, 234, 255 );
@@ -207,6 +220,11 @@ class Testing(QMainWindow):
         self.dictionaryAction = QAction('Слова в алфавитном порядке')
         self.theoryMenu.addAction(self.dictionaryAction)
         self.dictionaryAction.triggered.connect(self.onDictionary)
+
+    def onNewWordAction(self):
+        self.newWord = ChooseWord(self)
+        self.setCentralWidget(self.newWord)
+        self.newWord.show()
 
     def onDictionary(self):
         self.dictionary = DictionaryWindow(self.con, self.id, self)
@@ -271,7 +289,6 @@ class DictionaryWindow(QWidget):
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         #слово по клику
         self.wordList.currentTextChanged.connect(self.selectionChanged)
-        self.newWord.clicked.connect(self.chooseWindow)
         self.refresh()
         
     def refresh(self):
@@ -311,10 +328,6 @@ class DictionaryWindow(QWidget):
             print(error)
 
 
-    def chooseWindow(self):
-        self.chooseWord = ChooseWord(self)
-        self.chooseWord.setWindowModality(QtCore.Qt.WindowModal)
-        self.chooseWord.show()
             
     #выводим значение слова      
     def selectionChanged(self, item):
@@ -323,11 +336,10 @@ class DictionaryWindow(QWidget):
             self.discWord.setText(self.disc[ind])
 
         
-class ChooseWord(QMainWindow):
-    def __init__(self, dictionaryWindow):
-        super().__init__(dictionaryWindow)
-        
-        self.dictWindow = dictionaryWindow
+class ChooseWord(QWidget):
+    def __init__(self, testWindow):
+        super().__init__(testWindow)
+        self.testWindow = testWindow
         uic.loadUi('chooseword.ui', self)
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         
@@ -351,8 +363,7 @@ class ChooseWord(QMainWindow):
                 with open('termsdisc.csv', mode='a', encoding='windows-1251') as csvf:
                     s = f'{newWord};{meaning}\n'
                     csvf.writelines(s)
-            self.dictWindow.refresh()
-            self.close()
+            self.testWindow.onDictionary()
 
         else:
             QMessageBox.critical(self, 'Ошибка', 'Неверный ввод')
@@ -452,6 +463,7 @@ class KeywordsTestWindow(QWidget):
         uic.loadUi('keywordsquestions.ui', self)
         self.con = connection
         self.id = userId
+        self.testWindow = testWindow
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
 
         # cоздаем список слов и их объяснений
@@ -468,6 +480,7 @@ class KeywordsTestWindow(QWidget):
         self.anButton2.clicked.connect(self.secondButtonCheck)
         self.anButton3.clicked.connect(self.thirdButtonCheck)
         self.reset()
+        self.chooseWord()
 
     # сбрасываем переменные чтобы заново проходить тест
     def reset(self):
@@ -475,7 +488,7 @@ class KeywordsTestWindow(QWidget):
         self.rightAnswer = ''
         self.answerCount = 0
         # индексы слов для тестов
-        self.left = [int(i) for i in range(0, len(self.words) - 1)]
+        self.left = [int(i) for i in range(0, len(self.words))]
 
     # кнопка 1
     def firstButtonCheck(self):
@@ -539,10 +552,10 @@ class KeywordsTestWindow(QWidget):
                 self.left.remove(ind)
                 variants.append(ind)
 
-                ans1 = self.randAns(0, len(self.words) - 1, variants)
+                ans1 = self.randAns(0, len(self.words)-1, variants)
                 variants.append(ans1)
 
-                ans2 = self.randAns(0, len(self.words) - 1, variants)
+                ans2 = self.randAns(0, len(self.words)-1, variants)
 
                 self.word.setText(self.words[ind])
                 rightAn = self.disc[ind]
@@ -564,7 +577,11 @@ class KeywordsTestWindow(QWidget):
                 cur.execute('''INSERT INTO test_results(user_id, lesson, points)
                 VALUES(?, "keywords", ?)''', (self.id, points,))
                 self.con.commit()
-                QMessageBox.information(self, 'Тест пройден', f"Правильных ответов: {points // 10} из 15")
+                kc = 0
+                for row in open("keywords.csv", encoding='windows-1251'):
+                    kc += 1
+                QMessageBox.information(self, 'Тест пройден', f"Правильных ответов: {points // 10} из {kc}")
+                self.testWindow.onMainAction()
 
         except Exception as error:
             print(error)
@@ -579,6 +596,7 @@ class DevelopTestWindow(QWidget):
         uic.loadUi('developquestions.ui', self)
         self.con = connection
         self.id = userId
+        self.testWindow = testWindow
         cur = self.con.cursor()
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         with open('developing.csv', encoding='windows-1251') as csvf:
@@ -594,8 +612,8 @@ class DevelopTestWindow(QWidget):
         self.anButton1.clicked.connect(self.firstButtonCheck)
         self.anButton2.clicked.connect(self.secondButtonCheck)
         self.anButton3.clicked.connect(self.thirdButtonCheck)
-
         self.reset()
+        self.chooseWord()
 
     # сбрасываем переменные чтобы заново проходить тест
     def reset(self):
@@ -603,7 +621,7 @@ class DevelopTestWindow(QWidget):
         self.rightAnswer = ''
         self.answerCount = 0
         # индексы слов для тестов
-        self.left = [int(i) for i in range(0, len(self.words) - 1)]
+        self.left = [int(i) for i in range(0, len(self.words))]
 
     # кнопка 1
     def firstButtonCheck(self):
@@ -689,7 +707,11 @@ class DevelopTestWindow(QWidget):
                 cur.execute('''INSERT INTO test_results(user_id, lesson, points)
                 VALUES(?, "develop", ?)''', (self.id, points,))
                 self.con.commit()
-                QMessageBox.information(self, 'Тест пройден', f"Правильных ответов: {points // 10} из 14")
+                dc = 0
+                for row in open("developing.csv", encoding='windows-1251'):
+                    dc += 1
+                QMessageBox.information(self, 'Тест пройден', f"Правильных ответов: {points // 10} из {dc}")
+                self.testWindow.onMainAction()
         except Exception as error:
             print(error)
 
@@ -763,6 +785,7 @@ class TermsTestWindow(QWidget):
         self.con = connection
         self.id = userId
         cur = self.con.cursor()
+        self.testWindow = testWindow
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         with open('terms.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
@@ -779,6 +802,7 @@ class TermsTestWindow(QWidget):
         self.anButton3.clicked.connect(self.thirdButtonCheck)
 
         self.reset()
+        self.chooseWord()
 
     # сбрасываем переменные чтобы заново проходить тест
     def reset(self):
@@ -874,7 +898,7 @@ class TermsTestWindow(QWidget):
                 VALUES(?, "terms", ?)''', (self.id, points,))
                 self.con.commit()
                 QMessageBox.information(self, 'Тест пройден', f"Правильных ответов: {points // 10} из 9")
-
+                self.testWindow.onMainAction()
         except Exception as error:
             print(error)
             
@@ -888,20 +912,8 @@ class KeywordsWindow(QWidget):
         self.con = connection
         self.id = userId
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
-        self.readButton.clicked.connect(self.readCheck)
         cur = self.con.cursor()
-        style = '''
-                QPushButton{background-color:rgb(89, 222, 118);
-                border-radius: 20px;
-                border-style: outset;
-                 border-width: 4px;
-                border-color:rgb(191, 191, 191);
-                color:rgb(57, 57, 57);}
-                '''
-        if len(cur.execute('''SELECT lesson FROM theory
-            WHERE user_id = ? and lesson = "develop"''', (self.id,)).fetchall()) > 0:
-            self.readButton.setStyleSheet(style)
-        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
+
         #слово по клику
         try:
             self.wordList.currentTextChanged.connect(self.selectionChanged)
@@ -936,26 +948,8 @@ class KeywordsWindow(QWidget):
             ind = self.lst.index(item)
             self.answer.setText(self.disc[ind])
 
-    # проверяем прочитан ли уже урок и записываем, если да
-    def readCheck(self):
-        try:
-            cur = self.con.cursor()
-            style = '''
-                QPushButton{background-color:rgb(89, 222, 118);
-                border-radius: 20px;
-                border-style: outset;
-                 border-width: 4px;
-                border-color:rgb(191, 191, 191);
-                color:rgb(57, 57, 57);}
-                '''
-            self.readButton.setStyleSheet(style)
-            if len(cur.execute('''SELECT lesson FROM theory
-            WHERE user_id = ? and lesson = "keywords"''', (self.id,)).fetchall()) == 0:
-                cur.execute('''INSERT INTO theory(user_id, lesson) VALUES(?, "keywords")
-                            ''', (self.id,))
-                self.con.commit()
-        except Exception as err:
-            print(err)
+
+
 
 
 # окно урока со словами для разработки
@@ -966,20 +960,7 @@ class DevelopWindow(QWidget):
         self.con = connection
         self.id = userId
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
-        self.readButton.clicked.connect(self.readCheck)
         cur = self.con.cursor()
-        style = '''
-                QPushButton{background-color:rgb(89, 222, 118);
-                border-radius: 20px;
-                border-style: outset;
-                 border-width: 4px;
-                border-color:rgb(191, 191, 191);
-                color:rgb(57, 57, 57);}
-                '''
-        if len(cur.execute('''SELECT lesson FROM theory
-            WHERE user_id = ? and lesson = "develop"''', (self.id,)).fetchall()) > 0:
-            self.readButton.setStyleSheet(style)
-        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         #слово по клику
         try:
             self.wordList.currentTextChanged.connect(self.selectionChanged)
@@ -1016,26 +997,7 @@ class DevelopWindow(QWidget):
 
 
     # проверяем прочитан ли уже урок и записываем, если да
-    def readCheck(self):
-        try:
-            cur = self.con.cursor()
-            style = '''
-                QPushButton{background-color:rgb(89, 222, 118);
-                border-radius: 20px;
-                border-style: outset;
-                 border-width: 4px;
-                border-color:rgb(191, 191, 191);
-                color:rgb(57, 57, 57);}
-                '''
-            self.readButton.setStyleSheet(style)
-            if len(cur.execute('''SELECT lesson FROM theory
-            WHERE user_id = ? and lesson = "develop"''', (self.id,)).fetchall()) == 0:
-                cur.execute('''INSERT INTO theory(user_id, lesson) VALUES(?, "develop")
-                            ''', (self.id,))
-                self.con.commit()
 
-        except Exception as err:
-            print(err)
             
 class ComputerWindow(QWidget):
     def __init__(self, connection, userId, theoryWindow):
@@ -1057,41 +1019,8 @@ class ComputerWindow(QWidget):
         self.ssd.setStyleSheet('background-image: url(ssd.png);')
         self.ports.setStyleSheet('background-image: url(ports.png);')
 
-        self.readButton.clicked.connect(self.readCheck)
-        style = '''
-                QPushButton{background-color:rgb(89, 222, 118);
-                border-radius: 20px;
-                border-style: outset;
-                 border-width: 4px;
-                border-color:rgb(191, 191, 191);
-                color:rgb(57, 57, 57);}
-                '''
-        cur = self.con.cursor()
-        if len(cur.execute('''SELECT lesson FROM theory
-            WHERE user_id = ? and lesson = "computer"''', (self.id,)).fetchall()) > 0:
-            self.readButton.setStyleSheet(style)
             
 
-    def readCheck(self):
-        try:
-            cur = self.con.cursor()
-            style = '''
-                QPushButton{background-color:rgb(89, 222, 118);
-                border-radius: 20px;
-                border-style: outset;
-                 border-width: 4px;
-                border-color:rgb(191, 191, 191);
-                color:rgb(57, 57, 57);}
-                '''
-            self.readButton.setStyleSheet(style)
-            if len(cur.execute('''SELECT lesson FROM theory
-            WHERE user_id = ? and lesson = "computer"''', (self.id,)).fetchall()) == 0:
-                cur.execute('''INSERT INTO theory(user_id, lesson) VALUES(?, "computer")
-                            ''', (self.id,))
-                self.con.commit()
-
-        except Exception as err:
-            print(err)
 
 
 class TermsWindow(QWidget):
@@ -1101,19 +1030,8 @@ class TermsWindow(QWidget):
         self.con = connection
         self.id = userId
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
-        self.readButton.clicked.connect(self.readCheck)
         cur = self.con.cursor()
-        style = '''
-                QPushButton{background-color:rgb(89, 222, 118);
-                border-radius: 20px;
-                border-style: outset;
-                 border-width: 4px;
-                border-color:rgb(191, 191, 191);
-                color:rgb(57, 57, 57);}
-                '''
-        if len(cur.execute('''SELECT lesson FROM theory
-            WHERE user_id = ? and lesson = "develop"''', (self.id,)).fetchall()) > 0:
-            self.readButton.setStyleSheet(style)
+
         self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         #слово по клику
         try:
@@ -1148,31 +1066,11 @@ class TermsWindow(QWidget):
         if item:
             ind = self.lst.index(item)
             self.answer.setText(self.disc[ind])
-            
 
-    def readCheck(self):
-        try:
-            cur = self.con.cursor()
-            style = '''
-                QPushButton{background:rgb(89, 222, 118);
-                border-radius: 20px;
-                border-style: outset;
-                 border-width: 4px;
-                border-color:rgb(191, 191, 191);
-                color:rgb(57, 57, 57);}
-                '''
-            self.readButton.setStyleSheet(style)
-            if len(cur.execute('''SELECT lesson FROM theory
-            WHERE user_id = ? and lesson = "terms"''', (self.id,)).fetchall()) == 0:
-                cur.execute('''INSERT INTO theory(user_id, lesson) VALUES(?, "terms")
-                            ''', (self.id,))
-                self.con.commit()
 
-        except Exception as err:
-            print(err)
         
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = MainWindow()
+    ex = OpenWindow()
     sys.exit(app.exec_())

@@ -66,6 +66,7 @@
              <font>
               <family>Trebuchet MS</family>
               <pointsize>20</pointsize>
+              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -84,6 +85,9 @@
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="bottomMargin">
+           <number>30</number>
+          </property>
           <item>
            <widget class="QListWidget" name="wordList">
             <property name="font">
@@ -121,52 +125,23 @@ border-style: solid</string>
             </property>
            </widget>
           </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QPushButton" name="readButton">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>200</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Trebuchet MS</family>
-            <pointsize>24</pointsize>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton{background: rgba(255, 255, 255, 0.4);
-border-radius: 20px;
-border-style: outset;
- border-width: 4px;
-border-color:rgb(191, 191, 191);
-color:rgb(57, 57, 57);}
-
-QPushButton:pressed {
-background: rgba(234, 234, 234, 0.6);
-color:rgb(57, 57, 57);
-}</string>
-          </property>
-          <property name="text">
-           <string>Прочитано</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </item>
