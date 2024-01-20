@@ -146,7 +146,7 @@ class Testing(QMainWindow):
         uic.loadUi('mainpage.ui', self)
         
         self.con = connection
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         # айди пользователя
         self.id = userId
         self.onMainAction()
@@ -199,7 +199,7 @@ class Testing(QMainWindow):
         self.termstheoryAction = QAction("Усложненные термины", self)
         self.theoryMenu.addAction(self.termstheoryAction)
         self.termstheoryAction.triggered.connect(self.onTermsTheory)
-        self.setStyleSheet('''.QMenu {background-color: rgb(145, 185, 247);
+        self.setStyleSheet('''.QMenu {background-color: rgb(226, 234, 255 );
                            font-size: 20px;
                            font-family: "Trebuchet MS", "Lucida Grande",
                            "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
@@ -268,7 +268,7 @@ class DictionaryWindow(QWidget):
         
         self.con = connection
         cur = self.con.cursor()
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}')
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         #слово по клику
         self.wordList.currentTextChanged.connect(self.selectionChanged)
         self.newWord.clicked.connect(self.chooseWindow)
@@ -309,8 +309,8 @@ class DictionaryWindow(QWidget):
                 self.wordList.addItem(self.words[i]) 
         except Exception as error:
             print(error)
-        
-        
+
+
     def chooseWindow(self):
         self.chooseWord = ChooseWord(self)
         self.chooseWord.setWindowModality(QtCore.Qt.WindowModal)
@@ -329,7 +329,7 @@ class ChooseWord(QMainWindow):
         
         self.dictWindow = dictionaryWindow
         uic.loadUi('chooseword.ui', self)
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}')
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         
         self.addword.clicked.connect(self.addWord)
 
@@ -365,11 +365,11 @@ class MainPage(QWidget):
         uic.loadUi('lessons.ui', self)
         self.con = connection
         cur = self.con.cursor()
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         # айди пользователя
         self.id = userId
         self.refresh()
-        self.picture.setStyleSheet('background-image: url(pixil-frame-0 (1).png);')
+        self.picture.setStyleSheet('background-image: url(english-for-it-specialists-1.png);')
         self.picture_2.setStyleSheet('background-image: url(pngwing.com.png);')
         try:
             name = cur.execute('''SELECT login FROM users
@@ -394,7 +394,7 @@ class MainPage(QWidget):
         keywordsPoints = 0
         if len(keywordsPointsData) > 0:
             keywordsPoints = keywordsPointsData[0][0]
-        self.keywordsPoints.setText(f'Ключевые слова: {keywordsPoints // 10} / {kc}')
+        self.keywordsPoints.setText(f'{keywordsPoints // 10} / {kc}')
 
 
         developPointsData = cur.execute('''SELECT points FROM test_results
@@ -402,31 +402,57 @@ class MainPage(QWidget):
         developPoints = 0
         if len(developPointsData) > 0:
             developPoints = developPointsData[0][0]
-        self.developPoints.setText(f'Слова для разработки: {developPoints // 10} / {dc}')
+        self.developPoints.setText(f'{developPoints // 10} / {dc}')
 
         compPointsData = cur.execute('''SELECT points FROM test_results
         WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'computer')).fetchall()
         compPoints = 0
         if len(compPointsData) > 0:
             compPoints = compPointsData[0][0]
-        self.compPoints.setText(f'Компьютер: {compPoints // 10} / 8')
+        self.compPoints.setText(f'{compPoints // 10} / 8')
 
         termsPointsData = cur.execute('''SELECT points FROM test_results
         WHERE user_id = ? and lesson = ? ORDER BY column DESC LIMIT 1''', (self.id, 'terms')).fetchall()
         termsPoints = 0
         if len(termsPointsData) > 0:
             termsPoints = termsPointsData[0][0]
-        self.termsPoint.setText(f'Вставить термин: {termsPoints // 10} / 9')
+        self.termsPoint.setText(f'{termsPoints // 10} / 9')
 
-
+greenButton = '''
+QPushButton{background: rgba(0, 170, 127, 0.8);
+border-radius: 20px;
+border-style: outset;
+ border-width: 5px;
+border-color:rgb(191, 191, 191);
+color:rgb(57, 57, 57);}
+'''
+redButton = '''
+QPushButton{background: rgba(197, 52, 23, 0.8);
+border-radius: 20px;
+border-style: outset;
+ border-width: 5px;
+border-color:rgb(191, 191, 191);
+color:rgb(57, 57, 57);}
+'''
+greyButton = '''
+QPushButton{background: rgba(255, 255, 255, 0.6);
+border-radius: 20px;
+border-style: outset;
+ border-width: 5px;
+border-color:rgb(191, 191, 191);
+color:rgb(57, 57, 57);}
+'''
 # окно тестов с ключевыми словами
 class KeywordsTestWindow(QWidget):
+    global greenButton
+    global redButton
+    global greyButton
     def __init__(self, connection, userId, testWindow):
         super().__init__(testWindow)
         uic.loadUi('keywordsquestions.ui', self)
         self.con = connection
         self.id = userId
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
 
         # cоздаем список слов и их объяснений
         with open('keywords.csv', encoding='windows-1251') as csvf:
@@ -454,102 +480,42 @@ class KeywordsTestWindow(QWidget):
     # кнопка 1
     def firstButtonCheck(self):
         if self.disc1.text() == self.rightAnswer:
-            self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+            self.anButton1.setStyleSheet(greenButton)
             self.answerCount += 1
 
         else:
-            self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(255, 73, 73);''')
+            self.anButton1.setStyleSheet(redButton)
             if self.disc2.text() == self.rightAnswer:
-                self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton2.setStyleSheet(greenButton)
             elif self.disc3.text() == self.rightAnswer:
-                self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton3.setStyleSheet(greenButton)
 
     # кнопка 2
     def secondButtonCheck(self):
         if self.disc2.text() == self.rightAnswer:
-            self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+            self.anButton2.setStyleSheet(greenButton)
             self.answerCount += 1
 
         else:
-            self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(255, 73, 73);''')
+            self.anButton2.setStyleSheet(redButton)
             if self.disc1.text() == self.rightAnswer:
-                self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton1.setStyleSheet(greenButton)
             elif self.disc3.text() == self.rightAnswer:
-                self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton3.setStyleSheet(greenButton)
 
     # кнопка 3
     def thirdButtonCheck(self):
         # проверяем на правильность
         if self.disc3.text() == self.rightAnswer:
-            self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+            self.anButton3.setStyleSheet(greenButton)
             self.answerCount += 1
         else:
             # отмечаем что неправильно и отмечаем правильное
-            self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(255, 73, 73);''')
+            self.anButton3.setStyleSheet(redButton)
             if self.disc2.text() == self.rightAnswer:
-                self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton2.setStyleSheet(greenButton)
             elif self.disc1.text() == self.rightAnswer:
-                self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton1.setStyleSheet(greenButton)
 
     # рандомно выбираем неповторяющиеся индексы
     def randAns(self, a, b, lst):
@@ -560,16 +526,7 @@ class KeywordsTestWindow(QWidget):
 
     def chooseWord(self):
         # сбрасываем цвет кнопок
-        button_style = '''QPushButton{background: rgba(255, 255, 255, 0.6);
-                    border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);}
-                    QPushButton:pressed {
-                    background: rgba(234, 234, 234, 0.8);
-                    color:rgb(57, 57, 57);}
-        '''
+        button_style = greyButton
         self.anButton1.setStyleSheet(button_style)
         self.anButton2.setStyleSheet(button_style)
         self.anButton3.setStyleSheet(button_style)
@@ -614,13 +571,16 @@ class KeywordsTestWindow(QWidget):
 
 
 class DevelopTestWindow(QWidget):
+    global greenButton
+    global redButton
+    global greyButton
     def __init__(self, connection, userId, testWindow):
         super().__init__(testWindow)
         uic.loadUi('developquestions.ui', self)
         self.con = connection
         self.id = userId
         cur = self.con.cursor()
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         with open('developing.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             self.words = []
@@ -648,95 +608,40 @@ class DevelopTestWindow(QWidget):
     # кнопка 1
     def firstButtonCheck(self):
         if self.disc1.text() == self.rightAnswer:
-            self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+            self.anButton1.setStyleSheet(greenButton)
             self.answerCount += 1
         else:
-            self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(255, 73, 73);''')
+            self.anButton1.setStyleSheet(redButton)
             if self.disc2.text() == self.rightAnswer:
-                self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton2.setStyleSheet(greenButton)
             elif self.disc3.text() == self.rightAnswer:
-                self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton3.setStyleSheet(greenButton)
 
     # кнопка 2
     def secondButtonCheck(self):
         if self.disc2.text() == self.rightAnswer:
-            self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+            self.anButton2.setStyleSheet(greenButton)
             self.answerCount += 1
         else:
-            self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(255, 73, 73);''')
+            self.anButton2.setStyleSheet(redButton)
             if self.disc1.text() == self.rightAnswer:
-                self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton1.setStyleSheet(greenButton)
             elif self.disc3.text() == self.rightAnswer:
-                self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton3.setStyleSheet(greenButton)
 
     # кнопка 3
     def thirdButtonCheck(self):
         # проверяем на правильность
         if self.disc3.text() == self.rightAnswer:
-            self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+            self.anButton3.setStyleSheet(greenButton)
             self.answerCount += 1
         else:
             # отмечаем что неправильно и отмечаем правильное
-            self.anButton3.setStyleSheet('background: rgb(255, 73, 73);')
+            self.anButton3.setStyleSheet(redButton)
             if self.disc2.text() == self.rightAnswer:
-                self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton2.setStyleSheet(greenButton)
             elif self.disc1.text() == self.rightAnswer:
-                self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton1.setStyleSheet(greenButton)
         # рандомно выбираем неповторяющиеся индексы
 
     def randAns(self, a, b, lst):
@@ -746,16 +651,7 @@ class DevelopTestWindow(QWidget):
                 return n
 
     def chooseWord(self):
-        button_style = '''QPushButton{background: rgba(255, 255, 255, 0.6);
-                    border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);}
-                    QPushButton:pressed {
-                    background: rgba(234, 234, 234, 0.8);
-                    color:rgb(57, 57, 57);}
-        '''
+        button_style = greyButton
         self.anButton1.setStyleSheet(button_style)
         self.anButton2.setStyleSheet(button_style)
         self.anButton3.setStyleSheet(button_style)
@@ -805,7 +701,7 @@ class ComputerTestWindow(QWidget):
         self.con = connection
         self.id = userId
         cur = self.con.cursor()
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
 
         
         self.checkAnswer.clicked.connect(self.check)
@@ -827,9 +723,9 @@ class ComputerTestWindow(QWidget):
     def again(self):
         self.points.setText(' ')
         style = '''color:rgb(57, 57, 57);
-                background-color: rgba(221, 221, 221, 0.5)
+                background-color: rgba(221, 221, 221, 0.1)
                 '''
-        for i in range(0, 8):
+        for i in range(0, 10):
             self.elements[i].setStyleSheet(style)
             self.elements[i].setText('')
             
@@ -858,13 +754,16 @@ class ComputerTestWindow(QWidget):
             print(error)
 
 class TermsTestWindow(QWidget):
+    global greenButton
+    global redButton
+    global greyButton
     def __init__(self, connection, userId, testWindow):
         super().__init__()
         uic.loadUi('termstest.ui', self)
         self.con = connection
         self.id = userId
         cur = self.con.cursor()
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         with open('terms.csv', encoding='windows-1251') as csvf:
             reader = csv.reader(csvf, delimiter=';', quotechar='"')
             self.words = []
@@ -889,96 +788,44 @@ class TermsTestWindow(QWidget):
         # индексы слов для тестов
         self.left = [int(i) for i in range(0, len(self.sentence) - 1)]
 
-    def redButton(self):
-        return 
 
     # кнопка 1
     def firstButtonCheck(self):
         if self.disc1.text() == self.rightAnswer:
-            self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+            self.anButton1.setStyleSheet(greenButton)
             self.answerCount += 1
         else:
-            self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(255, 73, 73);''')
+            self.anButton1.setStyleSheet(redButton)
             if self.disc2.text() == self.rightAnswer:
-                self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton2.setStyleSheet(greenButton)
             elif self.disc3.text() == self.rightAnswer:
-                self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton3.setStyleSheet(greenButton)
 
     # кнопка 2
     def secondButtonCheck(self):
         if self.disc2.text() == self.rightAnswer:
-            self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+            self.anButton2.setStyleSheet(greenButton)
             self.answerCount += 1
         else:
-            self.anButton2.setStyleSheet('background: rgb(255, 73, 73);')
+            self.anButton2.setStyleSheet(redButton)
             if self.disc1.text() == self.rightAnswer:
-                self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton1.setStyleSheet(greenButton)
             elif self.disc3.text() == self.rightAnswer:
-                self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton3.setStyleSheet(greenButton)
 
     # кнопка 3
     def thirdButtonCheck(self):
         # проверяем на правильность
         if self.disc3.text() == self.rightAnswer:
-            self.anButton3.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+            self.anButton3.setStyleSheet(greenButton)
             self.answerCount += 1
         else:
             # отмечаем что неправильно и отмечаем правильное
-            self.anButton3.setStyleSheet('background: rgb(255, 73, 73);')
+            self.anButton3.setStyleSheet(redButton)
             if self.disc2.text() == self.rightAnswer:
-                self.anButton2.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton2.setStyleSheet(greenButton)
             elif self.disc1.text() == self.rightAnswer:
-                self.anButton1.setStyleSheet('''border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);
-                    background: rgb(170, 255, 127);''')
+                self.anButton1.setStyleSheet(greenButton)
         # рандомно выбираем неповторяющиеся индексы
 
     def randAns(self, a, b, lst):
@@ -988,16 +835,7 @@ class TermsTestWindow(QWidget):
                 return n
 
     def chooseWord(self):
-        button_style = '''QPushButton{background: rgba(255, 255, 255, 0.6);
-                    border-radius: 10px;
-                    border-style: outset;
-                    border-width: 4px;
-                    border-color:rgb(191, 191, 191);
-                    color:rgb(57, 57, 57);}
-                    QPushButton:pressed {
-                    background: rgba(234, 234, 234, 0.8);
-                    color:rgb(57, 57, 57);}
-        '''
+        button_style = greyButton
         self.anButton1.setStyleSheet(button_style)
         self.anButton2.setStyleSheet(button_style)
         self.anButton3.setStyleSheet(button_style)
@@ -1049,7 +887,7 @@ class KeywordsWindow(QWidget):
         uic.loadUi('keywords.ui', self)
         self.con = connection
         self.id = userId
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         self.readButton.clicked.connect(self.readCheck)
         cur = self.con.cursor()
         style = '''
@@ -1063,7 +901,7 @@ class KeywordsWindow(QWidget):
         if len(cur.execute('''SELECT lesson FROM theory
             WHERE user_id = ? and lesson = "develop"''', (self.id,)).fetchall()) > 0:
             self.readButton.setStyleSheet(style)
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}')
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         #слово по клику
         try:
             self.wordList.currentTextChanged.connect(self.selectionChanged)
@@ -1127,7 +965,7 @@ class DevelopWindow(QWidget):
         uic.loadUi('develop.ui', self)
         self.con = connection
         self.id = userId
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}')
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         self.readButton.clicked.connect(self.readCheck)
         cur = self.con.cursor()
         style = '''
@@ -1141,7 +979,7 @@ class DevelopWindow(QWidget):
         if len(cur.execute('''SELECT lesson FROM theory
             WHERE user_id = ? and lesson = "develop"''', (self.id,)).fetchall()) > 0:
             self.readButton.setStyleSheet(style)
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}')
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         #слово по клику
         try:
             self.wordList.currentTextChanged.connect(self.selectionChanged)
@@ -1205,7 +1043,7 @@ class ComputerWindow(QWidget):
         uic.loadUi('comp.ui', self)
         self.con = connection
         self.id = userId
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         self.theoryWindow = theoryWindow
 
         self.cpu.setStyleSheet('background-image: url(cpu.png);')
@@ -1262,7 +1100,7 @@ class TermsWindow(QWidget):
         uic.loadUi('terms.ui', self)
         self.con = connection
         self.id = userId
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}') 
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         self.readButton.clicked.connect(self.readCheck)
         cur = self.con.cursor()
         style = '''
@@ -1276,7 +1114,7 @@ class TermsWindow(QWidget):
         if len(cur.execute('''SELECT lesson FROM theory
             WHERE user_id = ? and lesson = "develop"''', (self.id,)).fetchall()) > 0:
             self.readButton.setStyleSheet(style)
-        self.setStyleSheet('.QWidget {background-image: url(1abb32628a2a210f96208a9889bdc3ea.jpg);}')
+        self.setStyleSheet('.QWidget {background-image: url(8b5504825ea01ea1eb747632b8428926.png);}')
         #слово по клику
         try:
             self.wordList.currentTextChanged.connect(self.selectionChanged)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QWidget</class>
+ <class>TechEng</class>
  <widget class="QWidget" name="TechEng">
   <property name="geometry">
    <rect>
@@ -115,13 +115,13 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>80</width>
+                <width>50</width>
                 <height>50</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>80</width>
+                <width>50</width>
                 <height>50</height>
                </size>
               </property>
@@ -135,9 +135,9 @@
               </property>
               <property name="styleSheet">
                <string notr="true">QPushButton{background: rgba(255, 255, 255, 0.6);
-border-radius: 10px;
+border-radius: 20px;
 border-style: outset;
- border-width: 4px;
+ border-width: 5px;
 border-color:rgb(191, 191, 191);
 color:rgb(57, 57, 57);}
 
@@ -147,7 +147,7 @@ color:rgb(57, 57, 57);
 }</string>
               </property>
               <property name="text">
-               <string>1</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -189,13 +189,13 @@ color:rgb(57, 57, 57);
               </property>
               <property name="minimumSize">
                <size>
-                <width>80</width>
+                <width>50</width>
                 <height>50</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>80</width>
+                <width>50</width>
                 <height>50</height>
                </size>
               </property>
@@ -209,9 +209,9 @@ color:rgb(57, 57, 57);
               </property>
               <property name="styleSheet">
                <string notr="true">QPushButton{background: rgba(255, 255, 255, 0.6);
-border-radius: 10px;
+border-radius: 20px;
 border-style: outset;
- border-width: 4px;
+ border-width: 5px;
 border-color:rgb(191, 191, 191);
 color:rgb(57, 57, 57);}
 
@@ -221,7 +221,7 @@ color:rgb(57, 57, 57);
 }</string>
               </property>
               <property name="text">
-               <string>2</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -263,13 +263,13 @@ color:rgb(57, 57, 57);
               </property>
               <property name="minimumSize">
                <size>
-                <width>80</width>
+                <width>50</width>
                 <height>50</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>80</width>
+                <width>50</width>
                 <height>50</height>
                </size>
               </property>
@@ -283,9 +283,9 @@ color:rgb(57, 57, 57);
               </property>
               <property name="styleSheet">
                <string notr="true">QPushButton{background: rgba(255, 255, 255, 0.6);
-border-radius: 10px;
+border-radius: 20px;
 border-style: outset;
- border-width: 4px;
+ border-width: 5px;
 border-color:rgb(191, 191, 191);
 color:rgb(57, 57, 57);}
 
@@ -295,7 +295,7 @@ color:rgb(57, 57, 57);
 }</string>
               </property>
               <property name="text">
-               <string>3</string>
+               <string/>
               </property>
              </widget>
             </item>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>TechEng</class>
- <widget class="QMainWindow" name="TechEng">
+ <widget class="QWidget" name="TechEng">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -31,174 +31,175 @@
   <property name="windowTitle">
    <string>TechEng</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <property name="leftMargin">
-     <number>10</number>
-    </property>
-    <property name="topMargin">
-     <number>10</number>
-    </property>
-    <property name="rightMargin">
-     <number>10</number>
-    </property>
-    <property name="bottomMargin">
-     <number>10</number>
-    </property>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="spacing">
-       <number>100</number>
-      </property>
-      <property name="leftMargin">
-       <number>100</number>
-      </property>
-      <property name="rightMargin">
-       <number>100</number>
-      </property>
-      <item>
-       <widget class="QLineEdit" name="word">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Trebuchet MS</family>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background: rgba(255, 255, 255, 0.3);
+  <layout class="QVBoxLayout" name="verticalLayout_4">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <property name="topMargin">
+      <number>10</number>
+     </property>
+     <property name="rightMargin">
+      <number>10</number>
+     </property>
+     <property name="bottomMargin">
+      <number>10</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>100</number>
+       </property>
+       <property name="leftMargin">
+        <number>100</number>
+       </property>
+       <property name="rightMargin">
+        <number>100</number>
+       </property>
+       <item>
+        <widget class="QLineEdit" name="word">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Trebuchet MS</family>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background: rgba(255, 255, 255, 0.3);
 border-radius: 10px;
 border-style:solid;
  border-width:3px;
 border-color: rgb(85, 85, 255);
 color: rgb(57, 57, 57)</string>
-        </property>
-        <property name="placeholderText">
-         <string>Слово</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="meaning">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>90</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>90</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Trebuchet MS</family>
-          <pointsize>20</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background: rgba(255, 255, 255, 0.3);
+         </property>
+         <property name="placeholderText">
+          <string>Слово</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="meaning">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>90</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>90</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Trebuchet MS</family>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background: rgba(255, 255, 255, 0.3);
 border-radius: 10px;
 border-style:solid;
  border-width:3px;
 border-color: rgb(85, 85, 255);
 color: rgb(57,57,57)</string>
-        </property>
-        <property name="placeholderText">
-         <string>Значение</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <property name="spacing">
-         <number>10</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="font">
-           <font>
-            <family>Trebuchet MS</family>
-            <pointsize>20</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:  rgb(57, 57, 57)</string>
-          </property>
-          <property name="text">
-           <string>Выберите тип слова</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox">
-          <property name="font">
-           <font>
-            <family>Trebuchet MS</family>
-            <pointsize>20</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background: rgba(234, 234, 234, 0.6);
+         </property>
+         <property name="placeholderText">
+          <string>Значение</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <family>Trebuchet MS</family>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:  rgb(57, 57, 57)</string>
+           </property>
+           <property name="text">
+            <string>Выберите тип слова</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox">
+           <property name="font">
+            <font>
+             <family>Trebuchet MS</family>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background: rgba(234, 234, 234, 0.6);
 color: rgb(57, 57, 57)</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>Ключевые слова</string>
            </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Слова для разработки</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Back-end разработка</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QPushButton" name="addword">
-        <property name="font">
-         <font>
-          <family>Trebuchet MS</family>
-          <pointsize>22</pointsize>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton{background: rgba(255, 255, 255, 0.4);
+           <item>
+            <property name="text">
+             <string>Ключевые слова</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Слова для разработки</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Back-end разработка</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="addword">
+         <property name="font">
+          <font>
+           <family>Trebuchet MS</family>
+           <pointsize>22</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{background: rgba(255, 255, 255, 0.4);
 border-radius: 20px;
 border-style: outset;
  border-width: 4px;
@@ -209,16 +210,17 @@ QPushButton:pressed {
 background: rgba(234, 234, 234, 0.6);
 color:rgb(57, 57, 57);
 }</string>
-        </property>
-        <property name="text">
-         <string>Добавить слово</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
+         </property>
+         <property name="text">
+          <string>Добавить слово</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

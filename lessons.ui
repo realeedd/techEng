@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>851</width>
-    <height>690</height>
+    <width>950</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>850</width>
-    <height>600</height>
+    <width>950</width>
+    <height>800</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -42,7 +42,7 @@
     <widget class="QWidget" name="widget" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <property name="spacing">
-       <number>10</number>
+       <number>20</number>
       </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -102,7 +102,7 @@
              <string notr="true">color: rgb(57, 57, 57)</string>
             </property>
             <property name="text">
-             <string>hj</string>
+             <string/>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -139,120 +139,41 @@
        </layout>
       </item>
       <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <property name="spacing">
          <number>30</number>
         </property>
-        <item>
-         <widget class="QFrame" name="frame">
-          <property name="styleSheet">
-           <string notr="true">background-color:rgba(255, 255, 255, 0.4)</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <property name="spacing">
-            <number>30</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="lable">
-             <property name="font">
-              <font>
-               <family>Trebuchet MS</family>
-               <pointsize>24</pointsize>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(57, 57, 57)</string>
-             </property>
-             <property name="text">
-              <string>Последние прохождения тестов</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="keywordsPoints">
-             <property name="font">
-              <font>
-               <family>Trebuchet MS</family>
-               <pointsize>24</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(57, 57, 57);
-background-color: rgba(255, 255, 255, 0)</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="developPoints">
-             <property name="font">
-              <font>
-               <family>Trebuchet MS</family>
-               <pointsize>24</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(57, 57, 57);
-background-color: rgba(255, 255, 255, 0)</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="compPoints">
-             <property name="font">
-              <font>
-               <family>Trebuchet MS</family>
-               <pointsize>24</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(57, 57, 57);
-background-color: rgba(255, 255, 255, 0)</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="termsPoint">
-             <property name="font">
-              <font>
-               <family>Trebuchet MS</family>
-               <pointsize>24</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(57, 57, 57);
-background-color: rgba(255, 255, 255, 0)</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
+        <property name="bottomMargin">
+         <number>20</number>
+        </property>
         <item>
          <widget class="QLabel" name="picture">
           <property name="minimumSize">
            <size>
             <width>300</width>
-            <height>293</height>
+            <height>285</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>300</width>
-            <height>293</height>
+            <height>285</height>
            </size>
           </property>
           <property name="text">
@@ -263,12 +184,44 @@ background-color: rgba(255, 255, 255, 0)</string>
        </layout>
       </item>
       <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="font">
+         <font>
+          <family>Trebuchet MS</family>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(57, 57, 57);</string>
+        </property>
+        <property name="text">
+         <string>Результаты прошлых тестов</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="spacing">
          <number>20</number>
         </property>
         <property name="leftMargin">
-         <number>0</number>
+         <number>30</number>
         </property>
         <property name="topMargin">
          <number>30</number>
@@ -280,20 +233,221 @@ background-color: rgba(255, 255, 255, 0)</string>
          <number>50</number>
         </property>
         <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+         <widget class="QFrame" name="verticalFrame">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(226, 234, 255, 0.4);
+
+border-radius: 10px</string>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::MinimumExpanding</enum>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+
+background-color: rgba(255, 255, 255, 0);
+</string>
+             </property>
+             <property name="text">
+              <string>Ключевые слова</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="keywordsPoints">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>20</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+background-color: rgba(255, 255, 255, 0)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="verticalFrame_2">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(226, 234, 255, 0.4);
+
+border-radius: 10px</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>280</width>
-            <height>20</height>
-           </size>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+
+background-color: rgba(255, 255, 255, 0);
+</string>
+             </property>
+             <property name="text">
+              <string>Слова для разработки</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="developPoints">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+background-color: rgba(255, 255, 255, 0)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="verticalFrame_3">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(226, 234, 255, 0.4);
+
+border-radius: 10px</string>
           </property>
-         </spacer>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+
+background-color: rgba(255, 255, 255, 0);
+</string>
+             </property>
+             <property name="text">
+              <string>Компьютер</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="compPoints">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+background-color: rgba(255, 255, 255, 0)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="verticalFrame_4">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(226, 234, 255, 0.4);
+
+border-radius: 10px</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <property name="bottomMargin">
+            <number>1</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>18</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+
+background-color: rgba(255, 255, 255, 0);
+</string>
+             </property>
+             <property name="text">
+              <string>Вставить термин</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="termsPoint">
+             <property name="font">
+              <font>
+               <family>Trebuchet MS</family>
+               <pointsize>22</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(57, 57, 57);
+background-color: rgba(255, 255, 255, 0)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </item>

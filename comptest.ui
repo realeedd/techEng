@@ -75,6 +75,7 @@
              <font>
               <family>Trebuchet MS</family>
               <pointsize>22</pointsize>
+              <weight>50</weight>
               <bold>false</bold>
              </font>
             </property>
@@ -626,6 +627,7 @@ background-color: rgba(221, 221, 221, 0.1)
                <font>
                 <family>Trebuchet MS</family>
                 <pointsize>20</pointsize>
+                <weight>50</weight>
                 <bold>false</bold>
                </font>
               </property>
@@ -690,6 +692,7 @@ color:rgb(57, 57, 57);
                <font>
                 <family>Trebuchet MS</family>
                 <pointsize>20</pointsize>
+                <weight>50</weight>
                 <bold>false</bold>
                </font>
               </property>
